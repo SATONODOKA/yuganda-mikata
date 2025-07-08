@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>主語×述語 ジェネレーター</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2em; background: #f0f0f0; }
+    h1 { font-size: 1.5em; margin-bottom: 1em; }
+    .card { font-size: 1.8em; margin: 1em 0; color: #333; }
+    button { font-size: 1.2em; padding: 0.6em 1.2em; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>🎴 今日の断言 🎴</h1>
+  <div class="card" id="subject">（主語）</div>
+  <div class="card" id="predicate">（述語）</div>
+  <button onclick="generate()">次の断言を見る 🔄</button>
+
+  <script>
+    const subjects = {
+      A: ["筋トレしている人", "論破が好きな人", "サウナ好きな人", "営業職の人", "SNSに強い人"],
+      B: ["メガネの人", "地方出身の人", "末っ子の人", "料理が得意な人", "オタク気質の人"],
+      C: ["寝起きが悪い人", "無口な人", "声が大きい人", "朝活してる人", "推し活してる人"]
+    };
+
+    const predicates = {
+      A: ["プレゼンがうまい", "自信に満ちている", "他人に影響を与えがち", "異性にモテやすい", "会議を支配しがち"],
+      B: ["水族館で泣いたことがある", "心のどこかで帰りたいと思っている", "アイスの溶け方に詳しい", "独自通貨を作りたがる", "勝手に猫を推しにする"],
+      C: ["空気イスに強い", "週1で悟りを開く", "寿司を握りがち", "ChatGPTより説明がうまい", "宇宙から来た自覚がある"]
+    };
+
+    function getRandomItem(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function generate() {
+      // 出現割合：A:20% B:60% C:20%
+      const rand = Math.random();
+      let level = 'B';
+      if (rand < 0.2) level = 'A';
+      else if (rand > 0.8) level = 'C';
+
+      const subject = getRandomItem(subjects[level]);
+      const predicate = getRandomItem(predicates[level]);
+
+      document.getElementById("subject").innerText = `『 ${subject} 』`;
+      document.getElementById("predicate").innerText = `『 ${predicate} 』`;
+    }
+
+    generate(); // 初期表示
+  </script>
+</body>
+</html>
